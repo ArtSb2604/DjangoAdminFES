@@ -1,0 +1,136 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Демо Bootstrap</title>
+    <link rel="stylesheet" href="{% static 'adminfes/style/admin.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+<div class="container" style="margin: 0">
+    <div class="row" style="min-width: 100vw">
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height: 100vh;">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                <span class="fs-4">Админ-панель</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="{% url 'index_admin' %}" class="nav-link text-white" aria-current="page">
+                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
+                        Приборная панель
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'users' %}" class="nav-link active">
+                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                        Пользователи
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link text-white">
+                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+                        Orders
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link text-white">
+                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+                        Products
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link text-white">
+                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+                        Customers
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong>{{ user.username }}</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{% url 'logout_admin' %}">Выход</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col mx-auto" style="padding: 0 50px; background: #f6f7fb">
+            <div class="d-flex flex-column justify-content-start" style="width: 100%; margin: 50px 0; padding: 50px 0;height: 800px;background: #fff;border-radius: 10px;">
+                <div class="list_header d-flex px-5 justify-content-between" style="height: 40px; width: 100%;">
+                    <h4>Список пользователей</h4>
+                    <form class="form-inline d-flex">
+                        <input class="form-control mr-sm-2 mx-2" type="search" placeholder="Введите username" aria-label="Введите username">
+                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Поиск</button>
+                    </form>
+                </div>
+                <div class="list_header d-flex p-5 justify-content-between" style="height: auto; width: 100%;">
+                    <table class="table">
+                        <thead style="border: 1px solid #dadada;">
+                        <tr style="color: #474d58; font-size: 14px;">
+                            <th scope="col">Id</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Фамилия</th>
+                            <th scope="col">Имя</th>
+                            <th scope="col">Статус</th>
+                            <th scope="col">Действие</th>
+                        </tr>
+                        </thead>
+                        <tbody style="font-size: 14px;">
+                        {% for i in object_list %}
+                            <tr>
+                                <th class="align-middle" scope="row">{{ i.pk }}</th>
+                                <td class="align-middle">{{ i.username }}</td>
+                                <td class="align-middle">{{ i.last_name }}</td>
+                                <td class="align-middle">{{ i.first_name }}</td>
+                                <td class="align-middle">
+                                    {% if i.is_active == True %}
+                                        <button type="button" class="status-true d-flex align-items-center justify-content-center">Активен</button>
+                                    {% else %}
+                                        <button type="button" class="status-false d-flex align-items-center justify-content-center">Дизактивен</button>
+                                    {% endif %}
+                                </td>
+                                <td class="align-middle">
+                                    <div class="d-flex" style="width: 100%">
+                                        <a type="button" class="btn_action btn_action_edit mx-1 d-flex align-items-center justify-content-center"></a>
+                                        <a type="button" class="btn_action btn_action_delete mx-1 d-flex align-items-center justify-content-center"></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            <nav class="mx-5 d-flex justify-content-center">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link">1 / 43</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script src="{% static 'adminfes/js/progressbar.min.js' %}"></script>
+</html>

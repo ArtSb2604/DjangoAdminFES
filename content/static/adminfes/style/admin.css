@@ -1,0 +1,51 @@
+.btn_action {
+  width: 32px;
+  height: 32px;
+  background: #fff;
+  border: none;
+  background-size: 18px 18px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+.btn_action_edit {
+  background-image: url("/static/adminfes/img/edit.svg");
+}
+
+.btn_action_delete {
+  background-image: url("/static/adminfes/img/delete.svg");
+}
+
+.btn_action_edit:hover {
+  background-color: #0d6efd;
+  transition: all 0.3s;
+  background-image: url("/static/adminfes/img/edit-white.svg");
+}
+
+.btn_action_delete:hover {
+  background-color: #0d6efd;
+  transition: all 0.3s;
+  background-image: url("/static/adminfes/img/delete-white.svg");
+}
+
+.btn_img {
+  width: 16px;
+  height: 16px;
+}
+
+.status-true {
+  background-color: #05d34e;
+  border: navajowhite;
+  border-radius: 10px;
+  color: #fff;
+  padding: 0 15px;
+}
+
+.status-false {
+  background-color: #ff0000;
+  border: navajowhite;
+  border-radius: 10px;
+  color: #fff;
+  padding: 0 15px;
+}

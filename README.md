@@ -6,6 +6,6 @@
 ```
 docker compose up --build
 ```
-<h2>Admin link</h2>
+<h2>Admin Panel</h2>
 Django Admin - http://127.0.0.1:8000/admin/
 AdminFES - http://127.0.0.1:8000/adminfes/

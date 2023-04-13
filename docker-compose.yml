@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  web:
+    container_name: DjangoInit
+    build: .
+    ports:
+      - "7776:7776"
+    volumes:
+      - static_volume:/app/content/static
+      - media_volume:/app/content/media
+    command: >
+      sh -c " python manage.py makemigrations &&
+              python manage.py migrate &&
+              gunicorn djangoInit.wsgi:application -b :7776"
+volumes:
+  media_volume:
+  static_volume:
